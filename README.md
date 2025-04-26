@@ -1,23 +1,49 @@
-<<<<<<< HEAD
-<p align="center"><img src="https://statamic.com/assets/branding/Statamic-Logo+Wordmark-Rad.svg" width="400" alt="Statamic Logo" /></p>
+# ModStreamCMS 📲🔒 [![Statamic 4](https://img.shields.io/badge/Statamic-5-FF269E?logo=statamic)](https://statamic.com) [![Laravel 10](https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel)](https://laravel.com)
 
-## About Statamic
+**Modded APK Management Platform with Built-in CPA Monetization**  
+*Streamline modded Android app distribution with SEO-optimized content locking and multilingual support*
 
-Statamic is the flat-first, Laravel + Git powered CMS designed for building beautiful, easy to manage websites.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Stars](https://img.shields.io/github/stars/YourUsername/ModStreamCMS?style=social)](https://github.com/YourUsername/ModStreamCMS/stargazers)
 
-> [!NOTE]
-> This repository contains the code for a fresh Statamic project that is installed via the Statamic CLI tool.
->
-> The code for the Statamic Composer package itself can be found at the [Statamic core package repository][cms-repo].
+# ModStreamCMS
 
+![ModStreamCMS Logo](https://statamic.com/assets/branding/Statamic-Logo+Wordmark-Rad.svg)
 
-## Learning Statamic
+## Project Name
 
-Statamic has extensive [documentation][docs]. We dedicate a significant amount of time and energy every day to improving them, so if something is unclear, feel free to open issues for anything you find confusing or incomplete. We are happy to consider anything you feel will make the docs and CMS better.
+ModStreamCMS
 
-## Support
+## Description
 
-We provide official developer support on [Statamic Pro](https://statamic.com/pricing) projects. Community-driven support is available on the [forum](https://statamic.com/forum) and in [Discord][discord].
+ModStreamCMS is a Statamic-powered Content Management System (CMS) designed for managing and modding Android Package Kits (APKs). It provides a user-friendly interface for organizing, updating, and distributing modded APKs. The target audience for this CMS includes APK modders, app distributors, and communities focused on Android application customization.
+
+## 🔑 Key Features
+
+* **Statamic-Powered:** 🚀 Headless CMS capabilities with Laravel backend
+*   **APK Management:** Easily upload, categorize, and manage APK files.
+*   **Mod Information:** Store and display detailed information about each mod, such as features, version, and author.
+*   **User Feedback:** Implement a feedback system to gather user opinions and suggestions.
+*   **Offer integration:** Allow to add offer and link to user for get app.
+*   **Content organization:** Provide easy to use interface for managing the content.
+*   **User Management:** Control access and permissions for users and contributors.
+*   **SEO Friendly:** Built with SEO best practices to help users find your content.
+*   **Modded APK Management:** 📦 Secure APK/ZIP/PDF hosting with version control
+*   **CPA Content Locking:** 💰 Integrated offer walls and content lockers for APK monetization
+
+## Installation
+
+1.  **Clone the Repository:**
+       git clone https://github.com/YourUsername/ModStreamCMS.git
+        cd ModStreamCMS
+    
+3.  **Install dependencies:**
+       composer install --optimize-autoloader
+       npm install && npm run build
+    
+3. **Configure environment**
+    cp .env.example .env
+    php artisan key:generate
 
 
 ## Contributing
@@ -42,7 +68,10 @@ In order to ensure that the Statamic community is welcoming to all and generally
 [discord]: https://statamic.com/discord
 [contribution]: https://github.com/statamic/cms/blob/master/CONTRIBUTING.md
 [cms-repo]: https://github.com/statamic/cms
+
 =======
 # ModStreamCMS
 Statamic-powered CMS for managing/modding APKs
 >>>>>>> 42e4d416a33bba6bda6687f3c1f35ad4d6a8b6f3
+>>>>>>>
+
