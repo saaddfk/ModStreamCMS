@@ -4,7 +4,7 @@
 *Streamline modded Android app distribution with SEO-optimized content locking and multilingual support*
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Stars](https://img.shields.io/github/stars/YourUsername/ModStreamCMS?style=social)](https://github.com/YourUsername/ModStreamCMS/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/saaddfk/ModStreamCMS?style=social)](https://github.com/saaddfk/ModStreamCMS/stargazers)
 
 # ModStreamCMS
 
