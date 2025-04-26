@@ -1,0 +1,121 @@
+title: Offer
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              display: Title
+              instructions: 'Will be displayed as the main heading on the background image'
+          -
+            handle: subtitle
+            field:
+              type: text
+              display: Subtitle
+              instructions: 'Will be displayed below the title on the background image'
+          -
+            handle: price
+            field:
+              type: text
+              display: Price
+              instructions: 'Display price with currency symbol (e.g. $5.00)'
+          -
+            handle: rating
+            field:
+              type: integer
+              validate:
+                - 'min:0'
+                - 'max:5'
+              display: Rating
+              instructions: 'Rating from 0-5, will display as stars'
+              default: 4.8
+          -
+            handle: get_offer
+            field:
+              type: link
+              display: 'Get Offer'
+  design:
+    display: Design
+    sections:
+      -
+        display: 'Image & Colors'
+        fields:
+          -
+            handle: background_image
+            field:
+              type: assets
+              container: assets
+              max_files: 1
+              display: 'Background Image'
+              instructions: "Used as the card's header background image"
+              mode: grid
+          -
+            handle: overlay_opacity
+            field:
+              type: range
+              default: 70
+              display: 'Overlay Opacity'
+              instructions: 'Controls how dark the overlay on the background image is (0-100%)'
+          -
+            handle: text_color
+            field:
+              type: color
+              default: '#FFFFFF'
+              display: 'Overlay Text Color'
+              instructions: 'Color of the title/subtitle on the background image'
+          -
+            handle: button_color
+            field:
+              type: select
+              options:
+                red: Red
+                blue: Blue
+                green: Green
+                purple: Purple
+                indigo: Indigo
+              display: 'Button Color'
+              default: red
+      -
+        display: Features
+        fields:
+          -
+            handle: is_popular
+            field:
+              type: toggle
+              display: 'Is Popular?'
+              instructions: 'Adds a special badge to the card'
+          -
+            handle: badge_text
+            field:
+              type: text
+              display: 'Badge Text'
+              instructions: 'Text displayed in the badge (e.g. Popular, New, etc.)'
+              default: Popular
+              if:
+                is_popular: 'equals true'
+          -
+            handle: badge_color
+            field:
+              type: color
+              default: '#EF4444'
+              display: 'Badge Color'
+              if:
+                is_popular: 'equals true'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

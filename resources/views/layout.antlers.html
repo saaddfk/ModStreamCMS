@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ site:short_locale }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ title ?? site:name }}</title>
+        {{ vite src="resources/js/site.js|resources/css/site.css" }}
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com"Featured Offers
+        crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    </head>
+    <body class="bg-gradient-to-br from-gray-900 to-gray-800 text-slate-900 dark:text-gray-300 antialiased">
+            {{ template_content }}
+    </body>
+</html>

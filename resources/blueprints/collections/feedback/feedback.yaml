@@ -1,0 +1,38 @@
+collections:
+  feedback:
+    title: Feedback
+    route: feedback/{slug}
+    fields:
+      - handle: user
+        type: text
+        validate: required
+      - handle: text
+        type: textarea
+        validate: required
+      - handle: category
+        type: select
+        default: general
+        options:
+          general: General
+          praise: Praise
+          suggestion: Suggestion
+          issue: Issue
+      - handle: avatar
+        type: assets
+        container: avatars
+        max_files: 1
+      - handle: upvotes
+        type: integer
+        default: 0
+      - handle: comments
+        type: replicator
+        sets:
+          comment:
+            fields:
+              - handle: user
+                type: text
+              - handle: text
+                type: textarea
+              - handle: timestamp
+                type: date
+                time_enabled: true

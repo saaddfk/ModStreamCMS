@@ -1,0 +1,89 @@
+title: Page
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: hero_heading
+            field:
+              type: text
+              validate:
+                - required
+              display: 'Hero Heading'
+              instructions: 'Main heading for the hero section'
+          -
+            handle: hero_subtext
+            field:
+              type: textarea
+              display: 'Hero Subtext'
+              instructions: 'Subtext below the main heading'
+          -
+            handle: download_button_text
+            field:
+              default: 'Download Free Guide'
+              type: text
+              display: 'Download Button Text'
+          -
+            handle: safety_guide_text
+            field:
+              default: 'Learn how to safely find and install modded apps.'
+              type: text
+              display: 'Safety Guide Text'
+      -
+        display: 'Offer Section'
+        instructions: 'Featured Offers'
+        fields:
+          -
+            handle: featured_offers_heading
+            field:
+              default: 'Featured Offers'
+              type: text
+              display: 'Featured Offers Heading'
+          -
+            handle: view_all_text
+            field:
+              default: 'View All Offers'
+              type: text
+              display: 'View All Text'
+          -
+            handle: view_all_link
+            field:
+              type: link
+              display: 'View All Link'
+      -
+        display: 'New Section'
+        fields:
+          -
+            handle: offers
+            field:
+              type: collections
+              display: Offers
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
+              localizable: true

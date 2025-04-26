@@ -1,0 +1,173 @@
+<section class="py-16 bg-gray-800" x-data="communityFeedback()" x-init="init()">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-10 text-white">Live Feedback</h2>
+        
+        <!-- Live Feedback Container -->
+        <div class="max-w-4xl mx-auto space-y-6"
+             aria-live="polite"
+             role="log"
+             aria-label="Live community feedback messages">
+            
+            {{# Loop through real feedback from CMS #}}
+            <template x-for="(message, index) in visibleMessages" :key="index">
+                <div class="bg-gray-800 rounded-lg shadow-xl p-6 border border-gray-700 transition-opacity duration-500"
+                     x-show="currentIndex === index"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 transform translate-x-6"
+                     x-transition:enter-end="opacity-100 transform translate-x-0"
+                     x-transition:leave="transition ease-in duration-200"
+                     x-transition:leave-start="opacity-100 transform translate-x-0"
+                     x-transition:leave-end="opacity-0 transform -translate-x-6">
+                    
+                    <div class="flex items-start space-x-4">
+                        <!-- User Avatar -->
+                        <div class="flex-shrink-0 relative">
+                            <img :src="message.avatar" 
+                                 class="w-12 h-12 rounded-full object-cover ring-2 ring-offset-2 ring-teal-500 dark:ring-offset-slate-800"
+                                 :alt="`${message.user} avatar`">
+                            <span class="absolute -bottom-1 -right-1 bg-${message.category_color}-500 text-xs px-2 py-1 rounded-full">
+                                {{ svg:message.category_icon class="w-4 h-4" }}
+                            </span>
+                        </div>
+
+                        <!-- Message Content -->
+                        <div class="flex-grow">
+                            <div class="bg-gray-700 text-gray-300 p-4 rounded-lg shadow">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="font-medium text-teal-400" x-text="message.user"></span>
+                                    <span class="text-xs text-gray-400" x-text="formatTime(message.timestamp)"></span>
+                                </div>
+                                <p class="text-sm" x-text="message.text"></p>
+                            </div>
+                            
+                            <!-- Interaction Bar -->
+                            <div class="mt-2 flex items-center space-x-4 text-sm text-gray-400">
+                                <button @click="upvoteMessage(message)" 
+                                        class="flex items-center hover:text-green-400 transition-colors">
+                                    {{ svg:thumb-up class="w-4 h-4 mr-1" }}
+                                    <span x-text="message.upvotes"></span>
+                                </button>
+                                <button @click="toggleComment(message)" 
+                                        class="flex items-center hover:text-blue-400 transition-colors">
+                                    {{ svg:comment class="w-4 h-4 mr-1" }}
+                                    <span x-text="message.comments.length"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Progress Indicators -->
+            <div class="flex justify-center space-x-2">
+                <template x-for="(_, index) in visibleMessages" :key="index">
+                    <button @click="currentIndex = index"
+                            class="w-3 h-3 rounded-full transition-colors"
+                            :class="currentIndex === index ? 'bg-teal-500' : 'bg-gray-600'"
+                            :aria-label="`Go to feedback message ${index + 1}`">
+                    </button>
+                </template>
+            </div>
+        </div>
+
+        <!-- Real Submission Form -->
+        <div class="max-w-2xl mx-auto mt-12">
+            <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                <h3 class="text-xl font-semibold mb-4 text-white">Share Your Feedback</h3>
+                <form @submit.prevent="submitFeedback" class="space-y-4">
+                    <textarea x-model="newMessage" 
+                              class="w-full bg-gray-800 rounded-lg p-4 text-white placeholder-gray-400"
+                              placeholder="Write your feedback..."
+                              required></textarea>
+                    <div class="flex justify-between items-center">
+                        <div class="flex space-x-2">
+                            <template x-for="category in categories" :key="category.value">
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="radio" 
+                                           x-model="selectedCategory" 
+                                           :value="category.value" 
+                                           class="hidden peer">
+                                    <span class="px-3 py-1 rounded-full text-sm"
+                                          :class="selectedCategory === category.value 
+                                            ? `bg-${category.color}-500 text-white`
+                                            : 'bg-gray-700 text-gray-300 hover:bg-gray-600'">
+                                        <span x-text="category.label"></span>
+                                    </span>
+                                </label>
+                            </template>
+                        </div>
+                        <button type="submit" 
+                                class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-lg transition-colors">
+                            Send Feedback
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('communityFeedback', () => ({
+        messages: [],
+        newMessage: '',
+        selectedCategory: 'general',
+        categories: [
+            { value: 'praise', label: 'Praise', color: 'green', icon: 'emoji-happy' },
+            { value: 'suggestion', label: 'Suggestion', color: 'blue', icon: 'light-bulb' },
+            { value: 'issue', label: 'Issue', color: 'red', icon: 'exclamation' },
+            { value: 'general', label: 'General', color: 'gray', icon: 'chat' }
+        ],
+        currentIndex: 0,
+        interval: null,
+
+        init() {
+            // Load initial feedback from Statamic
+            this.messages = {{ collection:feedback limit="10" as="entries" }}{{ entries }}{{ /collection:feedback }};
+            
+            // Start rotation
+            this.interval = setInterval(() => {
+                this.currentIndex = (this.currentIndex + 1) % this.visibleMessages.length;
+            }, 8000);
+        },
+
+        get visibleMessages() {
+            return this.messages.slice(0, 5);
+        },
+
+        formatTime(timestamp) {
+            const date = new Date(timestamp * 1000);
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        },
+
+        upvoteMessage(message) {
+            message.upvotes = (message.upvotes || 0) + 1;
+            // Here you would typically make an API call to persist the upvote
+        },
+
+        toggleComment(message) {
+            message.showComment = !message.showComment;
+        },
+
+        submitFeedback() {
+            if (this.newMessage.trim()) {
+                this.messages.unshift({
+                    user: 'New User',
+                    text: this.newMessage,
+                    category: this.selectedCategory,
+                    timestamp: Math.floor(Date.now() / 1000),
+                    upvotes: 0,
+                    comments: [],
+                    avatar: '/assets/avatars/default.png'
+                });
+                
+                this.newMessage = '';
+                this.selectedCategory = 'general';
+                
+                // Here you would typically make an API call to submit the feedback
+            }
+        }
+    }));
+});
+</script>
