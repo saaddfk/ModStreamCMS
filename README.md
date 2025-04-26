@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><img src="https://statamic.com/assets/branding/Statamic-Logo+Wordmark-Rad.svg" width="400" alt="Statamic Logo" /></p>
 
 ## About Statamic
@@ -41,3 +42,7 @@ In order to ensure that the Statamic community is welcoming to all and generally
 [discord]: https://statamic.com/discord
 [contribution]: https://github.com/statamic/cms/blob/master/CONTRIBUTING.md
 [cms-repo]: https://github.com/statamic/cms
+=======
+# ModStreamCMS
+Statamic-powered CMS for managing/modding APKs
+>>>>>>> 42e4d416a33bba6bda6687f3c1f35ad4d6a8b6f3
